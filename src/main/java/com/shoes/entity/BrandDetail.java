@@ -1,13 +1,22 @@
 package com.shoes.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
-/**
- * The persistent class for the brand_detail database table.
- * 
- */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="brand_detail")
 @NamedQuery(name="BrandDetail.findAll", query="SELECT b FROM BrandDetail b")
@@ -19,39 +28,11 @@ public class BrandDetail implements Serializable {
 
 	//bi-directional many-to-one association to Brand
 	@ManyToOne
-	@JoinColumn(name="id_brand")
+	@JoinColumn(name="id_brand",referencedColumnName = "id", insertable = false, updatable = false)
 	private Brand brand;
 
 	//bi-directional many-to-one association to Product
 	@ManyToOne
-	@JoinColumn(name="id_product")
+	@JoinColumn(name="id_product",referencedColumnName = "id", insertable = false, updatable = false)
 	private Product product;
-
-	public BrandDetail() {
-	}
-
-	public BrandDetailPK getId() {
-		return this.id;
-	}
-
-	public void setId(BrandDetailPK id) {
-		this.id = id;
-	}
-
-	public Brand getBrand() {
-		return this.brand;
-	}
-
-	public void setBrand(Brand brand) {
-		this.brand = brand;
-	}
-
-	public Product getProduct() {
-		return this.product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
 }

@@ -1,14 +1,27 @@
 package com.shoes.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-/**
- * The persistent class for the option_value database table.
- * 
- */
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="option_value")
 @NamedQuery(name="OptionValue.findAll", query="SELECT o FROM OptionValue o")
@@ -30,54 +43,5 @@ public class OptionValue implements Serializable {
 	//bi-directional many-to-one association to SkuValue
 	@OneToMany(mappedBy="optionValue")
 	private List<SkuValue> skuValues;
-
-	public OptionValue() {
-	}
-
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getValueName() {
-		return this.valueName;
-	}
-
-	public void setValueName(String valueName) {
-		this.valueName = valueName;
-	}
-
-	public Option getOption() {
-		return this.option;
-	}
-
-	public void setOption(Option option) {
-		this.option = option;
-	}
-
-	public List<SkuValue> getSkuValues() {
-		return this.skuValues;
-	}
-
-	public void setSkuValues(List<SkuValue> skuValues) {
-		this.skuValues = skuValues;
-	}
-
-	public SkuValue addSkuValue(SkuValue skuValue) {
-		getSkuValues().add(skuValue);
-		skuValue.setOptionValue(this);
-
-		return skuValue;
-	}
-
-	public SkuValue removeSkuValue(SkuValue skuValue) {
-		getSkuValues().remove(skuValue);
-		skuValue.setOptionValue(null);
-
-		return skuValue;
-	}
 
 }

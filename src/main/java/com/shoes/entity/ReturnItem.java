@@ -1,13 +1,24 @@
 package com.shoes.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
-/**
- * The persistent class for the return_item database table.
- * 
- */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="return_item")
 @NamedQuery(name="ReturnItem.findAll", query="SELECT r FROM ReturnItem r")
@@ -38,64 +49,4 @@ public class ReturnItem implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_user")
 	private User user;
-
-	public ReturnItem() {
-	}
-
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getDescription() {
-		return this.description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getPayments() {
-		return this.payments;
-	}
-
-	public void setPayments(String payments) {
-		this.payments = payments;
-	}
-
-	public int getStatus() {
-		return this.status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
-
-	public Order getOrder() {
-		return this.order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
-	}
-
-	public ProductSku getProductSku() {
-		return this.productSku;
-	}
-
-	public void setProductSku(ProductSku productSku) {
-		this.productSku = productSku;
-	}
-
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 }

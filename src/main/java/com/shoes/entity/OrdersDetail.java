@@ -1,13 +1,18 @@
 package com.shoes.entity;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-/**
- * The persistent class for the orders_detail database table.
- * 
- */
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="orders_detail")
 @NamedQuery(name="OrdersDetail.findAll", query="SELECT o FROM OrdersDetail o")
@@ -21,47 +26,11 @@ public class OrdersDetail implements Serializable {
 
 	//bi-directional many-to-one association to Order
 	@ManyToOne
-	@JoinColumn(name="id_order")
+	@JoinColumn(name="id_order",referencedColumnName = "id", insertable = false, updatable = false)
 	private Order order;
 
 	//bi-directional many-to-one association to ProductSku
 	@ManyToOne
-	@JoinColumn(name="id_productSku")
+	@JoinColumn(name="id_productSku",referencedColumnName = "id", insertable = false, updatable = false)
 	private ProductSku productSku;
-
-	public OrdersDetail() {
-	}
-
-	public OrdersDetailPK getId() {
-		return this.id;
-	}
-
-	public void setId(OrdersDetailPK id) {
-		this.id = id;
-	}
-
-	public int getQuantity() {
-		return this.quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public Order getOrder() {
-		return this.order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
-	}
-
-	public ProductSku getProductSku() {
-		return this.productSku;
-	}
-
-	public void setProductSku(ProductSku productSku) {
-		this.productSku = productSku;
-	}
-
 }
