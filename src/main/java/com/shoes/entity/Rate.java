@@ -1,10 +1,8 @@
 package com.shoes.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.io.Serializable;
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 
 /**
@@ -12,8 +10,6 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Data
-@AllArgsConstructor
 @NamedQuery(name="Rate.findAll", query="SELECT r FROM Rate r")
 public class Rate implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,20 +18,59 @@ public class Rate implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name="create_date")
-	private String createDate;
-
-	private String description;
-
-	@Column(name="id_product")
-	private int idProduct;
+	private String content;
 
 	private int rate;
 
-	//bi-directional one-to-one association to Product
-	@OneToOne
-	@JoinColumn(name="id")
+	@Column(name="rate_date")
+	private Timestamp rateDate;
+
+	//bi-directional many-to-one association to Product
+	@ManyToOne
+	@JoinColumn(name="id_product")
 	private Product product;
 
+	public Rate() {
+	}
+
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getContent() {
+		return this.content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public int getRate() {
+		return this.rate;
+	}
+
+	public void setRate(int rate) {
+		this.rate = rate;
+	}
+
+	public Timestamp getRateDate() {
+		return this.rateDate;
+	}
+
+	public void setRateDate(Timestamp rateDate) {
+		this.rateDate = rateDate;
+	}
+
+	public Product getProduct() {
+		return this.product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 
 }

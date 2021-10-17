@@ -1,8 +1,5 @@
 package com.shoes.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -12,8 +9,6 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Data
-@AllArgsConstructor
 @Table(name="product_sku_value")
 @NamedQuery(name="ProductSkuValue.findAll", query="SELECT p FROM ProductSkuValue p")
 public class ProductSkuValue implements Serializable {
@@ -22,5 +17,41 @@ public class ProductSkuValue implements Serializable {
 	@EmbeddedId
 	private ProductSkuValuePK id;
 
+	//bi-directional many-to-one association to SkuValue
+	@ManyToOne
+	@JoinColumn(name="id_skuValue")
+	private SkuValue skuValue;
+
+	//bi-directional many-to-one association to ProductSku
+	@ManyToOne
+	@JoinColumn(name="id_productSku")
+	private ProductSku productSku;
+
+	public ProductSkuValue() {
+	}
+
+	public ProductSkuValuePK getId() {
+		return this.id;
+	}
+
+	public void setId(ProductSkuValuePK id) {
+		this.id = id;
+	}
+
+	public SkuValue getSkuValue() {
+		return this.skuValue;
+	}
+
+	public void setSkuValue(SkuValue skuValue) {
+		this.skuValue = skuValue;
+	}
+
+	public ProductSku getProductSku() {
+		return this.productSku;
+	}
+
+	public void setProductSku(ProductSku productSku) {
+		this.productSku = productSku;
+	}
 
 }

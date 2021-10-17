@@ -1,8 +1,5 @@
 package com.shoes.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
@@ -13,8 +10,6 @@ import java.util.List;
  * 
  */
 @Entity
-@Data
-@AllArgsConstructor
 @NamedQuery(name="Brand.findAll", query="SELECT b FROM Brand b")
 public class Brand implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -23,19 +18,51 @@ public class Brand implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	private int name;
+	private String name;
 
-	//bi-directional many-to-many association to Product
-	@ManyToMany
-	@JoinTable(
-		name="branddetail"
-		, joinColumns={
-			@JoinColumn(name="id_brand")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_product")
-			}
-		)
-	private List<Product> products;
+	//bi-directional many-to-one association to BrandDetail
+	@OneToMany(mappedBy="brand")
+	private List<BrandDetail> brandDetails;
+
+	public Brand() {
+	}
+
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<BrandDetail> getBrandDetails() {
+		return this.brandDetails;
+	}
+
+	public void setBrandDetails(List<BrandDetail> brandDetails) {
+		this.brandDetails = brandDetails;
+	}
+
+	public BrandDetail addBrandDetail(BrandDetail brandDetail) {
+		getBrandDetails().add(brandDetail);
+		brandDetail.setBrand(this);
+
+		return brandDetail;
+	}
+
+	public BrandDetail removeBrandDetail(BrandDetail brandDetail) {
+		getBrandDetails().remove(brandDetail);
+		brandDetail.setBrand(null);
+
+		return brandDetail;
+	}
 
 }
