@@ -14,24 +14,23 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UsersVO implements Serializable {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private Integer id;
+	private Integer id;
 
-    private Boolean active;
+	private Boolean active;
 
-    private String email;
+	private String email;
 
-    private String name;
+	private String name;
 
-    private String password;
+	private String password;
 
-    private String photo;
+	private String photo;
 
-    private String username;
-    private String token;
-    
-    private Role role;
+	private String username;
+	private String token;
 
+	private Role role;
 
 }
