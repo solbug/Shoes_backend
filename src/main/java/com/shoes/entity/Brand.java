@@ -1,14 +1,23 @@
 package com.shoes.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
-/**
- * The persistent class for the brand database table.
- * 
- */
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @NamedQuery(name="Brand.findAll", query="SELECT b FROM Brand b")
 public class Brand implements Serializable {
@@ -23,46 +32,4 @@ public class Brand implements Serializable {
 	//bi-directional many-to-one association to BrandDetail
 	@OneToMany(mappedBy="brand")
 	private List<BrandDetail> brandDetails;
-
-	public Brand() {
-	}
-
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<BrandDetail> getBrandDetails() {
-		return this.brandDetails;
-	}
-
-	public void setBrandDetails(List<BrandDetail> brandDetails) {
-		this.brandDetails = brandDetails;
-	}
-
-	public BrandDetail addBrandDetail(BrandDetail brandDetail) {
-		getBrandDetails().add(brandDetail);
-		brandDetail.setBrand(this);
-
-		return brandDetail;
-	}
-
-	public BrandDetail removeBrandDetail(BrandDetail brandDetail) {
-		getBrandDetails().remove(brandDetail);
-		brandDetail.setBrand(null);
-
-		return brandDetail;
-	}
-
 }

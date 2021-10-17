@@ -1,14 +1,25 @@
 package com.shoes.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
-/**
- * The persistent class for the rate database table.
- * 
- */
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @NamedQuery(name="Rate.findAll", query="SELECT r FROM Rate r")
 public class Rate implements Serializable {
@@ -29,48 +40,5 @@ public class Rate implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_product")
 	private Product product;
-
-	public Rate() {
-	}
-
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getContent() {
-		return this.content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public int getRate() {
-		return this.rate;
-	}
-
-	public void setRate(int rate) {
-		this.rate = rate;
-	}
-
-	public Timestamp getRateDate() {
-		return this.rateDate;
-	}
-
-	public void setRateDate(Timestamp rateDate) {
-		this.rateDate = rateDate;
-	}
-
-	public Product getProduct() {
-		return this.product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
 
 }

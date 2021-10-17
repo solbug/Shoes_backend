@@ -1,14 +1,26 @@
 package com.shoes.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-/**
- * The persistent class for the sku_value database table.
- * 
- */
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="sku_value")
 @NamedQuery(name="SkuValue.findAll", query="SELECT s FROM SkuValue s")
@@ -32,54 +44,4 @@ public class SkuValue implements Serializable {
 	//bi-directional many-to-one association to ProductSkuValue
 	@OneToMany(mappedBy="skuValue")
 	private List<ProductSkuValue> productSkuValues;
-
-	public SkuValue() {
-	}
-
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public OptionValue getOptionValue() {
-		return this.optionValue;
-	}
-
-	public void setOptionValue(OptionValue optionValue) {
-		this.optionValue = optionValue;
-	}
-
-	public Option getOption() {
-		return this.option;
-	}
-
-	public void setOption(Option option) {
-		this.option = option;
-	}
-
-	public List<ProductSkuValue> getProductSkuValues() {
-		return this.productSkuValues;
-	}
-
-	public void setProductSkuValues(List<ProductSkuValue> productSkuValues) {
-		this.productSkuValues = productSkuValues;
-	}
-
-	public ProductSkuValue addProductSkuValue(ProductSkuValue productSkuValue) {
-		getProductSkuValues().add(productSkuValue);
-		productSkuValue.setSkuValue(this);
-
-		return productSkuValue;
-	}
-
-	public ProductSkuValue removeProductSkuValue(ProductSkuValue productSkuValue) {
-		getProductSkuValues().remove(productSkuValue);
-		productSkuValue.setSkuValue(null);
-
-		return productSkuValue;
-	}
-
 }
