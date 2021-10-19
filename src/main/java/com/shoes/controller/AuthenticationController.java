@@ -1,4 +1,4 @@
-package com.shoes.Controller;
+package com.shoes.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shoes.config.TokenProvider;
 import com.shoes.entity.User;
-import com.shoes.service.UserService;
+import com.shoes.service.serviceImp.UserServiceImp;
 import com.shoes.vo.LoginVo;
 import com.shoes.vo.UsersVO;
 
@@ -26,7 +26,7 @@ import com.shoes.vo.UsersVO;
 public class AuthenticationController {
 
 	@Autowired
-	private UserService userService;
+	private UserServiceImp userService;
 
 	@Autowired
 	private AuthenticationManager authenticationManager;

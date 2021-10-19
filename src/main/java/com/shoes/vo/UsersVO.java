@@ -29,6 +29,11 @@ public class UsersVO implements Serializable {
 	private String photo;
 
 	private String username;
+
+	private String phoneNumber;
+
+	private Integer status;
+
 	private String token;
 
 	private Role role;

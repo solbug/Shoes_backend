@@ -14,7 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.shoes.service.UserService;
+import com.shoes.service.serviceImp.UserServiceImp;
 
 @Configuration
 @EnableWebSecurity
@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Autowired
-	private UserService userService;
+	private UserServiceImp userService;
 
 	@Autowired
 	private JwtAuthenticationEntryPoint unauthorizedHandler;
