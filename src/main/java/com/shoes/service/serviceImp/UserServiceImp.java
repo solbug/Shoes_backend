@@ -6,6 +6,8 @@ import com.shoes.vo.UsersVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -49,6 +51,18 @@ public class UserServiceImp implements IUserService, UserDetailsService {
 	}
 
 	@Override
+	public UsersVO update(Integer id, UsersVO usersVO) {
+		Optional<User> userOptional = usersRepository.findById(id);
+		if (!userOptional.isPresent()) {
+			return null;
+		}
+		User userOld = userOptional.get();
+		String passwordHash = passwordEncoder.encode(usersVO.getPassword());
+		usersVO.setPassword(passwordHash);
+		return userMapper.toDto(usersRepository.save(userOld));
+	}
+
+	@Override
 	public UsersVO save(UsersVO usersVO) {
 		if(isExistsEmail(usersVO.getEmail())){
 			return null;
@@ -64,8 +78,10 @@ public class UserServiceImp implements IUserService, UserDetailsService {
 	}
 
 	@Override
-	public UsersVO update(Integer id, UsersVO usersVO) {
-		return null;
+	public List<UsersVO> findAll(Pageable pageable) {
+		Page<User> users = usersRepository.findUser(pageable);
+		List<User> userList = users.getContent();
+		return userMapper.toDto(userList);
 	}
 
 	@Override
@@ -96,6 +112,12 @@ public class UserServiceImp implements IUserService, UserDetailsService {
 		User user = userOptional.get();
 		user.setStatus(status);
 		userMapper.toDto(usersRepository.save(user));
+	}
+
+	@Override
+	public List<UsersVO> search(String name, Integer id) {
+		List<User> userList = usersRepository.search(name, id);
+		return userMapper.toDto(userList);
 	}
 
 	public boolean isExistsEmail(String email) {

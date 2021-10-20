@@ -1,20 +1,19 @@
 package com.shoes.service;
 
 
-import com.shoes.entity.User;
-import com.shoes.vo.UsersVO;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+
+import com.shoes.entity.User;
+import com.shoes.vo.UsersVO;
+import org.springframework.data.domain.Pageable;
 
 public interface IUserService {
     User findByUsername(String username);
 
     UsersVO save(UsersVO usersVO);
 
-    UsersVO update(Integer id, UsersVO usersVO);
+    List<UsersVO> findAll(Pageable pageable);
 
     List<UsersVO> findAll();
 
@@ -23,5 +22,9 @@ public interface IUserService {
     Optional<User> findById(Integer id);
 
     void deleteUserById(Integer id, Integer status);
+
+    List<UsersVO> search(String name, Integer id);
+
+    UsersVO update(Integer id, UsersVO usersVO);
 
 }
