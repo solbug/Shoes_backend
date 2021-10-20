@@ -21,7 +21,7 @@ public class Option implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	@Column(name="options_name")
 	private String optionsName;

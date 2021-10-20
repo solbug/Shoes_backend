@@ -29,7 +29,7 @@ public class SkuValue implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	//bi-directional many-to-one association to OptionValue
 	@ManyToOne

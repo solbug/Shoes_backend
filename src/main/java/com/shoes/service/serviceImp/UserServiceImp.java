@@ -45,7 +45,7 @@ public class UserServiceImp implements IUserService, UserDetailsService {
 
 	@Override
 	public User findByUsername(String username) {
-		return null;
+		return usersRepository.findByUsername(username);
 	}
 
 	@Override
@@ -61,6 +61,11 @@ public class UserServiceImp implements IUserService, UserDetailsService {
 		user.setVerifyCode(UUID.randomUUID());
 		User userNew = usersRepository.save(user);
 		return userMapper.toDto(userNew);
+	}
+
+	@Override
+	public UsersVO update(Integer id, UsersVO usersVO) {
+		return null;
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public class Voucher implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	private String description;
 
@@ -33,18 +33,18 @@ public class Voucher implements Serializable {
 	private Timestamp endDate;
 
 	@Column(name="max_value")
-	private double maxValue;
+	private Double maxValue;
 
 	@Column(name="min_value")
-	private double minValue;
+	private Double minValue;
 
 	private String name;
 
 	@Column(name="percent_discount")
-	private int percentDiscount;
+	private Integer percentDiscount;
 
 	@Column(name="start_date")
 	private Timestamp startDate;
 
-	private int status;
+	private Integer status;
 }

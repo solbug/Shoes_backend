@@ -22,7 +22,7 @@ public class OrdersDetail implements Serializable {
 	@EmbeddedId
 	private OrdersDetailPK id;
 
-	private int quantity;
+	private Integer quantity;
 
 	//bi-directional many-to-one association to Order
 	@ManyToOne

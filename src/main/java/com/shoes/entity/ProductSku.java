@@ -29,11 +29,11 @@ public class ProductSku implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	private String image;
 
-	private double price;
+	private Double price;
 
 	private String sku;
 

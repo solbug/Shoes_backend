@@ -18,9 +18,9 @@ public class OrdersDetailPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="id_order", insertable=false, updatable=false)
-	private int idOrder;
+	private Integer idOrder;
 
 	@Column(insertable=false, updatable=false)
-	private int id_productSku;
+	private Integer id_productSku;
 
 }
