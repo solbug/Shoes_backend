@@ -48,7 +48,7 @@ public class AuthenticationController {
 		usersVO.setToken(token);
 		usersVO.setUsername(vo.getUsername());
 		// Từ Username lấy thông tin của member
-		User users = userService.findUser(vo.getUsername());
+		User users = userService.findByUsername(vo.getUsername());
 		usersVO.setId(users.getId());
 		usersVO.setName(users.getUsername());
 		usersVO.setEmail(users.getEmail());

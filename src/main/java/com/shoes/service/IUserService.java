@@ -1,14 +1,12 @@
 package com.shoes.service;
 
 
-import com.shoes.entity.User;
-import com.shoes.vo.UsersVO;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+import com.shoes.entity.User;
+import com.shoes.vo.UsersVO;
+
 public interface IUserService {
     User findByUsername(String username);
 

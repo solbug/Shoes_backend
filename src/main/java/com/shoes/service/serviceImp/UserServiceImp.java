@@ -45,7 +45,7 @@ public class UserServiceImp implements IUserService, UserDetailsService {
 
 	@Override
 	public User findByUsername(String username) {
-		return null;
+		return usersRepository.findByUsername(username);
 	}
 
 	@Override

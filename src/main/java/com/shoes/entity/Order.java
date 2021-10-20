@@ -22,14 +22,14 @@ public class Order implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	private String address;
 
 	@Column(name="purchase_date")
 	private Timestamp purchaseDate;
 
-	private int status;
+	private Integer status;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne

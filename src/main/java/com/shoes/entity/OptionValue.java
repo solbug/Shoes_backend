@@ -30,7 +30,7 @@ public class OptionValue implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	@Column(name="value_name")
 	private String valueName;

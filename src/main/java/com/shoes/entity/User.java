@@ -34,7 +34,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String email;
     private String username;
@@ -45,9 +45,9 @@ public class User implements Serializable {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    private int status;
+    private Integer status;
 
-    private int verifyStatus;
+    private Integer verifyStatus;
 
     private UUID verifyCode;
     //bi-directional many-to-one association to Address
