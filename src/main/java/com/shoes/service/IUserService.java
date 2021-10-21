@@ -21,10 +21,10 @@ public interface IUserService {
 
     Optional<User> findById(Integer id);
 
-    void deleteUserById(Integer id, Integer status);
+    void deleteUserById(Integer id, Boolean status);
 
     List<UsersVO> search(String name, Integer id);
 
-    UsersVO update(Integer id, UsersVO usersVO);
+    UsersVO update(UsersVO usersVO);
 
 }

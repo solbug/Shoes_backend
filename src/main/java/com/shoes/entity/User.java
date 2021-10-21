@@ -45,7 +45,7 @@ public class User implements Serializable {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    private Integer status;
+    private Boolean status;
 
     private Integer verifyStatus;
 

@@ -51,14 +51,21 @@ public class UserServiceImp implements IUserService, UserDetailsService {
 	}
 
 	@Override
-	public UsersVO update(Integer id, UsersVO usersVO) {
-		Optional<User> userOptional = usersRepository.findById(id);
+	public UsersVO update(UsersVO usersVO) {
+		Optional<User> userOptional = usersRepository.findById(usersVO.getId());
 		if (!userOptional.isPresent()) {
 			return null;
 		}
 		User userOld = userOptional.get();
 		String passwordHash = passwordEncoder.encode(usersVO.getPassword());
 		usersVO.setPassword(passwordHash);
+		userOld.setEmail(usersVO.getEmail());
+		userOld.setUsername(usersVO.getUsername());
+		userOld.setName(usersVO.getName());
+		userOld.setRole(usersVO.getRole());
+		userOld.setPassword(usersVO.getPassword());
+		userOld.setPhoneNumber(usersVO.getPhoneNumber());
+		userOld.setStatus(usersVO.getStatus());
 		return userMapper.toDto(usersRepository.save(userOld));
 	}
 
@@ -70,8 +77,9 @@ public class UserServiceImp implements IUserService, UserDetailsService {
 		User user = userMapper.toEntity(usersVO);
 		String passwordHash = passwordEncoder.encode(user.getPassword());
 		user.setPassword(passwordHash);
-		user.setStatus(1);
+		user.setStatus(true);
 		user.setVerifyStatus(0);
+		user.setRole(usersVO.getRole());
 		user.setVerifyCode(UUID.randomUUID());
 		User userNew = usersRepository.save(user);
 		return userMapper.toDto(userNew);
@@ -107,7 +115,7 @@ public class UserServiceImp implements IUserService, UserDetailsService {
 	}
 
 	@Override
-	public void deleteUserById(Integer id, Integer status) {
+	public void deleteUserById(Integer id, Boolean status) {
 		Optional<User> userOptional = usersRepository.findById(id);
 		User user = userOptional.get();
 		user.setStatus(status);
