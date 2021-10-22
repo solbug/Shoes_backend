@@ -18,10 +18,10 @@ public class ProductSkuValuePK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(insertable=false, updatable=false)
-	private int id_productSku;
+	private Integer id_productSku;
 
 	@Column(insertable=false, updatable=false)
-	private int id_skuValue;
+	private Integer id_skuValue;
 
 	
 }

@@ -27,11 +27,11 @@ public class Rate implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	private String content;
 
-	private int rate;
+	private Integer rate;
 
 	@Column(name="rate_date")
 	private Timestamp rateDate;

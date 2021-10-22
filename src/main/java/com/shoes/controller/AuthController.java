@@ -1,4 +1,4 @@
-package com.shoes.Controller;
+package com.shoes.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

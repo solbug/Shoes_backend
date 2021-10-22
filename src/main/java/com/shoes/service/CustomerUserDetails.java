@@ -14,6 +14,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
+public
 class CustomerUserDetails implements UserDetails {
 
     User users;

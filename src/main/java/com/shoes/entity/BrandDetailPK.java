@@ -18,8 +18,8 @@ public class BrandDetailPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="id_product", insertable=false, updatable=false)
-	private int idProduct;
+	private Integer idProduct;
 
 	@Column(name="id_brand", insertable=false, updatable=false)
-	private int idBrand;
+	private Integer idBrand;
 }

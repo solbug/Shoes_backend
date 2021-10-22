@@ -2,6 +2,7 @@ package com.shoes.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,46 +22,48 @@ import lombok.NoArgsConstructor;
 
 /**
  * The persistent class for the users database table.
- * 
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="users")
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+@Table(name = "users")
+@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 public class User implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	private String email;
-	private String username;
-	private String name;
+    private String email;
+    private String username;
+    private String name;
 
-	private String password;
+    private String password;
 
-	@Column(name="phone_number")
-	private String phoneNumber;
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
-	private int status;
+    private Integer status;
 
-	//bi-directional many-to-one association to Address
-	@OneToMany(mappedBy="user")
-	private List<Address> addresses;
+    private Integer verifyStatus;
 
-	//bi-directional many-to-one association to Order
-	@OneToMany(mappedBy="user")
-	private List<Order> orders;
+    private UUID verifyCode;
+    //bi-directional many-to-one association to Address
+    @OneToMany(mappedBy = "user")
+    private List<Address> addresses;
 
-	//bi-directional many-to-one association to ReturnItem
-	@OneToMany(mappedBy="user")
-	private List<ReturnItem> returnItems;
+    //bi-directional many-to-one association to Order
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 
-	//bi-directional many-to-one association to Role
-	@ManyToOne
-	@JoinColumn(name="id_role")
-	private Role role;
+    //bi-directional many-to-one association to ReturnItem
+    @OneToMany(mappedBy = "user")
+    private List<ReturnItem> returnItems;
+
+    //bi-directional many-to-one association to Role
+    @ManyToOne
+    @JoinColumn(name = "id_role")
+    private Role role;
 }
