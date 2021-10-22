@@ -18,21 +18,17 @@ public class UsersVO implements Serializable {
 
 	private Integer id;
 
-	private Boolean active;
-
 	private String email;
 
 	private String name;
 
 	private String password;
 
-	private String photo;
-
 	private String username;
 
 	private String phoneNumber;
 
-	private Integer status;
+	private Boolean status;
 
 	private String token;
 

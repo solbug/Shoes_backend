@@ -6,6 +6,8 @@ import com.shoes.vo.UsersVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -49,6 +51,25 @@ public class UserServiceImp implements IUserService, UserDetailsService {
 	}
 
 	@Override
+	public UsersVO update(UsersVO usersVO) {
+		Optional<User> userOptional = usersRepository.findById(usersVO.getId());
+		if (!userOptional.isPresent()) {
+			return null;
+		}
+		User userOld = userOptional.get();
+		String passwordHash = passwordEncoder.encode(usersVO.getPassword());
+		usersVO.setPassword(passwordHash);
+		userOld.setEmail(usersVO.getEmail());
+		userOld.setUsername(usersVO.getUsername());
+		userOld.setName(usersVO.getName());
+		userOld.setRole(usersVO.getRole());
+		userOld.setPassword(usersVO.getPassword());
+		userOld.setPhoneNumber(usersVO.getPhoneNumber());
+		userOld.setStatus(usersVO.getStatus());
+		return userMapper.toDto(usersRepository.save(userOld));
+	}
+
+	@Override
 	public UsersVO save(UsersVO usersVO) {
 		if(isExistsEmail(usersVO.getEmail())){
 			return null;
@@ -56,11 +77,19 @@ public class UserServiceImp implements IUserService, UserDetailsService {
 		User user = userMapper.toEntity(usersVO);
 		String passwordHash = passwordEncoder.encode(user.getPassword());
 		user.setPassword(passwordHash);
-		user.setStatus(1);
+		user.setStatus(true);
 		user.setVerifyStatus(0);
+		user.setRole(usersVO.getRole());
 		user.setVerifyCode(UUID.randomUUID());
 		User userNew = usersRepository.save(user);
 		return userMapper.toDto(userNew);
+	}
+
+	@Override
+	public List<UsersVO> findAll(Pageable pageable) {
+		Page<User> users = usersRepository.findUser(pageable);
+		List<User> userList = users.getContent();
+		return userMapper.toDto(userList);
 	}
 
 	@Override
@@ -86,11 +115,17 @@ public class UserServiceImp implements IUserService, UserDetailsService {
 	}
 
 	@Override
-	public void deleteUserById(Integer id, Integer status) {
+	public void deleteUserById(Integer id, Boolean status) {
 		Optional<User> userOptional = usersRepository.findById(id);
 		User user = userOptional.get();
 		user.setStatus(status);
 		userMapper.toDto(usersRepository.save(user));
+	}
+
+	@Override
+	public List<UsersVO> search(String name, Integer id) {
+		List<User> userList = usersRepository.search(name, id);
+		return userMapper.toDto(userList);
 	}
 
 	public boolean isExistsEmail(String email) {
@@ -102,5 +137,4 @@ public class UserServiceImp implements IUserService, UserDetailsService {
 		}
 		return false;
 	}
-
 }

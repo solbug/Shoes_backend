@@ -6,11 +6,14 @@ import java.util.Optional;
 
 import com.shoes.entity.User;
 import com.shoes.vo.UsersVO;
+import org.springframework.data.domain.Pageable;
 
 public interface IUserService {
     User findByUsername(String username);
 
     UsersVO save(UsersVO usersVO);
+
+    List<UsersVO> findAll(Pageable pageable);
 
     List<UsersVO> findAll();
 
@@ -18,6 +21,10 @@ public interface IUserService {
 
     Optional<User> findById(Integer id);
 
-    void deleteUserById(Integer id, Integer status);
+    void deleteUserById(Integer id, Boolean status);
+
+    List<UsersVO> search(String name, Integer id);
+
+    UsersVO update(UsersVO usersVO);
 
 }
