@@ -24,14 +24,8 @@ public class Category implements Serializable {
 
 	private String name;
 
-	//bi-directional many-to-one association to Category
-	@ManyToOne
-	@JoinColumn(name="parent_id")
-	private Category category;
-
-	//bi-directional many-to-one association to Category
-	@OneToMany(mappedBy="category")
-	private List<Category> categories;
+	//id cha
+	private Integer parent_id;
 
 	//bi-directional many-to-one association to Product
 	@OneToMany(mappedBy="category")

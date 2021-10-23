@@ -27,7 +27,9 @@ public class CategoryServiceImp implements ICategoryService {
 
     @Override
     public CategoryVO save(CategoryVO categoryVO) {
-        return null;
+        Category category = categoryMapper.toEntity(categoryVO);
+        Category categoryNew = categoryRepository.save(category);
+        return categoryMapper.toDto(categoryNew);
     }
 
     @Override
@@ -37,16 +39,20 @@ public class CategoryServiceImp implements ICategoryService {
 
     @Override
     public CategoryVO findOneById(Integer id) {
+        Optional<Category> categoryOptional = categoryRepository.findById(id);
+        if(categoryOptional.isPresent()){
+            return categoryMapper.toDto(categoryOptional.get());
+        }
         return null;
     }
 
     @Override
     public Optional<Category> findById(Integer id) {
-        return Optional.empty();
+        return categoryRepository.findById(id);
     }
 
     @Override
     public void deleteCategory(Integer id) {
-
+        categoryRepository.deleteById(id);
     }
 }
