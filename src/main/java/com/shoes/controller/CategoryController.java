@@ -15,9 +15,14 @@ public class CategoryController {
     @Autowired
     ICategoryService categoryService;
 
-    @GetMapping("/add")
+    @PostMapping("/add")
     public ResponseEntity<?> addCategory(@RequestBody CategoryVO categoryVO){
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.save(categoryVO));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<CategoryVO> updateCategory(@RequestBody CategoryVO categoryVO){
+        return ResponseEntity.status(HttpStatus.OK).body(categoryService.update(categoryVO));
     }
 
     @GetMapping("/{id}")

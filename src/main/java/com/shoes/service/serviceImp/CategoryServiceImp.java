@@ -5,6 +5,7 @@ import com.shoes.mapper.CategoryMapper;
 import com.shoes.repositoty.CategoryRepository;
 import com.shoes.service.ICategoryService;
 import com.shoes.vo.CategoryVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,19 @@ public class CategoryServiceImp implements ICategoryService {
         Category category = categoryMapper.toEntity(categoryVO);
         Category categoryNew = categoryRepository.save(category);
         return categoryMapper.toDto(categoryNew);
+    }
+
+    @Override
+    public CategoryVO update(CategoryVO categoryVO) {
+        Optional<Category> categoryOptional = categoryRepository.findById(categoryVO.getId());
+        if(!categoryOptional.isPresent()){
+            return null;
+        }
+        Category categoryOld = categoryOptional.get();
+        categoryOld.setName(categoryVO.getName());
+        categoryOld.setParent_id(categoryVO.getParent_id());
+        categoryOld.setLevel(categoryVO.getLevel());
+        return categoryMapper.toDto(categoryRepository.save(categoryOld));
     }
 
     @Override

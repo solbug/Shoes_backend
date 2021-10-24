@@ -87,7 +87,7 @@ public class UserServiceImp implements IUserService, UserDetailsService {
 
 	@Override
 	public List<UsersVO> findAll(Pageable pageable) {
-		Page<User> users = usersRepository.findUser(pageable);
+		Page<User> users = usersRepository.findUsers(pageable);
 		List<User> userList = users.getContent();
 		return userMapper.toDto(userList);
 	}

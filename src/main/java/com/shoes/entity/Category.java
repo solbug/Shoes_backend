@@ -27,6 +27,9 @@ public class Category implements Serializable {
 	//id cha
 	private Integer parent_id;
 
+	//cấp độ
+	private Integer level;
+
 	//bi-directional many-to-one association to Product
 	@OneToMany(mappedBy="category")
 	private List<Product> products;

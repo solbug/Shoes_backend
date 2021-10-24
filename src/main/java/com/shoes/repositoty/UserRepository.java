@@ -16,12 +16,11 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
 	@Query("SELECT u FROM  User u")
-	Page<User> findUser(Pageable pageable);
+	Page<User> findUsers(Pageable pageable);
 
 	@Query(value = "SELECT * FROM users WHERE users.name like %?1% and users.id like %?2%",
 			nativeQuery = true)
 	List<User> search(String name, Integer id);
-	Optional<User> findById(Integer id);
 	Optional<User> findByEmailContaining(String email);
 	Optional<User> findByEmailContainingAndVerifyStatus(String email, Integer verifyStatus);
 	Optional<User> findByName(Integer id);
