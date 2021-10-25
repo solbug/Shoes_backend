@@ -1,6 +1,7 @@
 package com.shoes.mapper.imp;
 
 import com.shoes.config.ModelMapperConfig;
+import com.shoes.entity.Role;
 import com.shoes.entity.User;
 import com.shoes.mapper.UserMapper;
 import com.shoes.vo.UsersVO;
@@ -28,6 +29,9 @@ public class UserMapperImp implements UserMapper {
     public UsersVO toDto(User entity) {
         modelMapper = new ModelMapper();
         UsersVO usersVO = modelMapper.map(entity, UsersVO.class);
+        Role role = usersVO.getRole();
+        role.setUsers(null);
+        usersVO.setRole(role);
         return usersVO;
     }
 

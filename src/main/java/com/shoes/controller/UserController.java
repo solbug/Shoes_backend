@@ -105,7 +105,7 @@ public class UserController {
     }
 
     //Tim theo id
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UsersVO> findOneById(@PathVariable("id") Integer id) {
         UsersVO usersVO = userService.findOneById(id);
         return ResponseEntity.status(HttpStatus.OK).body(usersVO);
